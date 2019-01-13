@@ -87,11 +87,10 @@ public class consultQueue {
 	}
 	
 	public void displayQueue() throws IOException{
-		FileWriter writer = new FileWriter(new File("output.txt"));
+		FileWriter writer = new FileWriter(new File("output.txt"),true);
 		BufferedWriter  bw = new BufferedWriter(writer);
 		int sequenceNumber=1;
 		List<patientNode> restorePatientsInHeap = new ArrayList<>();  
-		bw.write("\t--------------");
 		bw.newLine();
 		while(patientQueue.size()>1){
 			patientNode patient = this.getMaxAgePatient();
