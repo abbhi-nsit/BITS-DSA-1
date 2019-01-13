@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class hospitalConsultation {
@@ -12,10 +13,11 @@ public class hospitalConsultation {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-		File file = new File("input.txt");
+		File inputFile = new File("input.txt");
 		FileReader reader;
 		try {
-			reader = new FileReader(file);
+			clearTheContentsOfOutputFile();
+			reader = new FileReader(inputFile);
 			BufferedReader br = new BufferedReader(reader);
 			String str=null;
 			patientRecord records = new patientRecord();
@@ -24,6 +26,7 @@ public class hospitalConsultation {
 				records.registerPatient(arr[0].trim(), Integer.valueOf(arr[1].trim()) );
 			}
 			consultQueue patientHeap = new consultQueue(records);
+			patientHeap.displayQueue();
 			boolean terminate = false;
 			while(!terminate){
 			
@@ -52,6 +55,13 @@ public class hospitalConsultation {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void clearTheContentsOfOutputFile() throws FileNotFoundException {
+		File outputFile = new File("output.txt");
+		PrintWriter writer = new PrintWriter(outputFile);
+		writer.print("");
+		writer.close();
 	}
 
 }
